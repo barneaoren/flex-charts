@@ -1,6 +1,6 @@
 {
   "name": "flexcharts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Simple CSS charts library, using flex-box model",
   "main": "index.js",
   "scripts": {
