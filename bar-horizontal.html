@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<title> flex-charts</title>
+<head>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="css/bar-horizontal.css">
+	<script src="js/flex-charts.js"></script>
+	<script src="js/bar-horizontal.js"></script>
+</head>
+<body>
+<h1>Bar Chart (Horizontal) <button onclick="updateData()">refresh</button></h1>
+<div id="demoBarHorizontal"></div>
+
+<script>
+	var barsCount = 10;
+	var itemsCount = 2;
+	var randomTo = 1000;
+
+	var options = {
+		id: "demoBarHorizontal",
+		width: "600px",
+		height:"200px",
+		categories: ["blue type", "red type"],
+		data: [],
+		labels: []
+	}
+	
+	var myChart;
+	
+	$(document).ready(function() {
+		while (options.data.length < barsCount) {
+			var barData = [];
+			while (barData.length < itemsCount) {
+				barData.push(Math.floor(Math.random() * randomTo));
+			}
+			options.data.push(barData);
+			options.labels.push("item #" + options.data.length);
+		}
+			myChart = new flexCharts().barChartHorizontal(options);
+	});
+	
+	function updateData(specificRandomTo) {
+		specificRandomTo = specificRandomTo !== undefined ? specificRandomTo : randomTo;
+		var data = [];
+		while (data.length < barsCount) {
+			var barData = [];
+			while (barData.length < itemsCount) {
+				barData.push(Math.floor(Math.random() * randomTo));
+			}
+			data.push(barData);
+		}
+		
+		myChart.update(data)
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+html, body, a{
+    font-family: Calibri;
+    font-weight: 200 !important;
+    padding: 0;
+    margin: 0;
+    color: #000;
+    text-decoration: none;
+}
+
+button, a {
+    background-color: white;
+    border: 1px solid;
+    line-height: 20px;
+    padding: 3px;
+    cursor: pointer;
+}
+
+a {
+    display: block;
+    margin: 5px;
+}
+
+button:hover, a:hover {
+    background-color: #0071c6;
+    color: #fff;
+}
+
+
+table {
+    width: 100%;
+    height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+
+}
+
+table, tr, td {
+    padding: 0 !important;
+    margin: 0 !important;
+    vertical-align: top;
+}
+
+table tr td:first-child {
+    border-right: 1px solid #000;
+}
+
+iframe {
+    width: 100%;
+    height: 90%;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none;
+}

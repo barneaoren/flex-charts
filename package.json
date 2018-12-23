@@ -1,0 +1,28 @@
+{
+  "name": "flexcharts",
+  "version": "0.0.1",
+  "description": "Simple CSS charts library, using flex-box model",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/barneaoren/flex-charts.git"
+  },
+  "author": "Oren Barnea",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/barneaoren/flex-charts/issues"
+  },
+  "homepage": "https://github.com/barneaoren/flex-charts#readme",
+  "dependencies": {
+    "jquery": "^3.3.1"
+  },
+  "keywords": [
+    "charts",
+    "flex",
+    "css",
+    "bars"
+  ]
+}
