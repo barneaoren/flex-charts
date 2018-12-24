@@ -1,11 +1,12 @@
 # flex-charts
 Simple CSS charts library, using flex-box model
 
-## Installation
-This module will be available soon via npm:
+## Demo
+https://flex-charts.azurewebsites.net/
 
+## Installation
 ```
-npm install --save flex-charts
+npm install --save flexcharts
 ```
 
 ### Creating horizontal bar chart
