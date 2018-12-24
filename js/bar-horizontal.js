@@ -13,7 +13,7 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 				this.target.classList.remove(this.target.classList.item(0));
 			}			
 		}
-	}
+	};
 	
 	this.draw = function() {
 		this.clear();
@@ -90,7 +90,7 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 			grid.classList.add("flex-charts-bar-horizontal-grid");
 			grid.style.bottom = perc + "%";
 			this.target.appendChild(grid);
-		};
+		}
 		
 		// add labels
 		if (this.labels) {
@@ -102,10 +102,10 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 				label.setAttribute("title", this.labels[labelIndex]);
 				label.classList.add("flex-charts-bar-horizontal-label");
 				labels.appendChild(label);
-			};
+			}
 			this.target.appendChild(labels);
 		}
-	}
+	};
 	
 	this.update = function(data) {
 		this.data = data;
@@ -132,11 +132,11 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 			for (var categoryIndex = 0; categoryIndex < this.stacks[stackIndex].categories.length; categoryIndex++) {
 				this.stacks[stackIndex].stack.style.height = stacksRelativeHeight[stackIndex] + "%";
 				this.stacks[stackIndex].categories[categoryIndex].bar.style.height = categoriesRelativeHeight[stackIndex][categoryIndex] + "%";
-				this.stacks[stackIndex].categories[categoryIndex].tooltip.innerHTML = data[stackIndex][categoryIndex];
+				this.stacks[stackIndex].categories[categoryIndex].tooltip.innerHTML = this.categories[categoryIndex] + ": " + data[stackIndex][categoryIndex];
 			}	
 		}
-	}
+	};
 	
 	this.draw();
 	return this;
-}
+};

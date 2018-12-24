@@ -4,13 +4,110 @@
 <head>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="css/bar-horizontal.css">
+	<link rel="stylesheet" href="css/bar-vertical.css">
 	<script src="js/flex-charts.js"></script>
-	<script src="js/bar-horizontal.js"></script>
+	<script src="js/bar-vertical.js"></script>
 </head>
 <body>
-<h1>Bar Chart (Vertical) <button onclick="updateData()">refresh</button></h1>
-TBD
+<h1>Bar Chart (Vertical)</h1>
+<div>
+	<button onclick="updateData()">random data</button>
+</div>
+<div>
+	<button onclick="increaseBars()">+</button>
+	Bars
+	<button onclick="decreaseBars()">-</button>
+</div>
+<div>
+	<button onclick="increaseCategories()">+</button>
+	Categories
+	<button onclick="decreaseCategories()">-</button>
+</div>
+<hr>
+<div id="demoBarVertical"></div>
+<script>
+    var barsCount = 10;
+    var itemsCount = 3;
+    var randomTo = 1000;
 
+    var options = {
+        id: "demoBarVertical",
+        width: "400px",
+        height:"350px",
+        categories: [],
+        data: [],
+        labels: []
+    };
+
+    var myChart;
+
+    $(document).ready(function() {
+        drawDemo();
+    });
+
+    function drawDemo() {
+        $('#'+options.id).html("");
+        $('#'+options.id).removeClass();
+        $('#'+options.id).height("");
+        options.data = [];
+        options.labels = [];
+        options.categories = [];
+        while (options.data.length < barsCount) {
+            var barData = [];
+            while (barData.length < itemsCount) {
+                barData.push(Math.floor(Math.random() * randomTo));
+            }
+            options.data.push(barData);
+            options.labels.push("item #" + options.data.length);
+        }
+
+        for (var i = 0; i < itemsCount; i++) {
+            options.categories.push("Category #" + i);
+		}
+        myChart = new flexCharts().barChartVertical(options);
+	}
+
+    function updateData(specificRandomTo) {
+        specificRandomTo = specificRandomTo !== undefined ? specificRandomTo : randomTo;
+        var data = [];
+        while (data.length < barsCount) {
+            var barData = [];
+            while (barData.length < itemsCount) {
+                barData.push(Math.floor(Math.random() * specificRandomTo));
+            }
+            data.push(barData);
+        }
+
+        myChart.update(data)
+    }
+
+    function increaseBars() {
+        if (barsCount < 40) {
+            barsCount++;
+            drawDemo();
+        }
+    }
+
+    function decreaseBars() {
+        if (barsCount > 1) {
+            barsCount--;
+            drawDemo();
+        }
+    }
+
+    function increaseCategories() {
+        if (itemsCount < 10) {
+            itemsCount++;
+            drawDemo();
+        }
+    }
+
+    function decreaseCategories() {
+        if (itemsCount > 1) {
+            itemsCount--;
+            drawDemo();
+        }
+    }
+</script>
 </body>
 </html>

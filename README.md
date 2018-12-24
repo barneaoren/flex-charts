@@ -4,6 +4,10 @@ Simple CSS charts library, using flex-box model
 ## Demo
 https://flex-charts.azurewebsites.net/
 
+## Available chart types
+- Horizontal bar chart
+- Vertical bar chart 
+
 ## Installation
 ```
 npm install --save flexcharts

@@ -9,7 +9,21 @@
 	<script src="js/bar-horizontal.js"></script>
 </head>
 <body>
-<h1>Bar Chart (Horizontal) <button onclick="updateData()">refresh</button></h1>
+<h1>Bar Chart (Horizontal)</h1>
+<div>
+	<button onclick="updateData()">random data</button>
+</div>
+<div>
+	<button onclick="increaseBars()">+</button>
+	Bars
+	<button onclick="decreaseBars()">-</button>
+</div>
+<div>
+	<button onclick="increaseCategories()">+</button>
+	Categories
+	<button onclick="decreaseCategories()">-</button>
+</div>
+<hr>
 <div id="demoBarHorizontal"></div>
 
 <script>
@@ -24,35 +38,86 @@
 		categories: ["blue type", "red type"],
 		data: [],
 		labels: []
-	}
+	};
 	
 	var myChart;
 	
 	$(document).ready(function() {
-		while (options.data.length < barsCount) {
-			var barData = [];
-			while (barData.length < itemsCount) {
-				barData.push(Math.floor(Math.random() * randomTo));
-			}
-			options.data.push(barData);
-			options.labels.push("item #" + options.data.length);
-		}
-			myChart = new flexCharts().barChartHorizontal(options);
+	    drawDemo();
+		// while (options.data.length < barsCount) {
+		// 	var barData = [];
+		// 	while (barData.length < itemsCount) {
+		// 		barData.push(Math.floor(Math.random() * randomTo));
+		// 	}
+		// 	options.data.push(barData);
+		// 	options.labels.push("item #" + options.data.length);
+		// }
+		// 	myChart = new flexCharts().barChartHorizontal(options);
 	});
-	
-	function updateData(specificRandomTo) {
+
+    function drawDemo() {
+        $('#'+options.id).html("");
+        $('#'+options.id).removeClass();
+        $('#'+options.id).height("");
+        options.data = [];
+        options.labels = [];
+        options.categories = [];
+        while (options.data.length < barsCount) {
+            var barData = [];
+            while (barData.length < itemsCount) {
+                barData.push(Math.floor(Math.random() * randomTo));
+            }
+            options.data.push(barData);
+            options.labels.push("item #" + options.data.length);
+        }
+
+        for (var i = 0; i < itemsCount; i++) {
+            options.categories.push("Category #" + i);
+        }
+        myChart = new flexCharts().barChartHorizontal(options);
+    }
+
+    function updateData(specificRandomTo) {
 		specificRandomTo = specificRandomTo !== undefined ? specificRandomTo : randomTo;
 		var data = [];
 		while (data.length < barsCount) {
 			var barData = [];
 			while (barData.length < itemsCount) {
-				barData.push(Math.floor(Math.random() * randomTo));
+				barData.push(Math.floor(Math.random() * specificRandomTo));
 			}
 			data.push(barData);
 		}
 		
 		myChart.update(data)
 	}
+
+    function increaseBars() {
+        if (barsCount < 40) {
+            barsCount++;
+            drawDemo();
+        }
+    }
+
+    function decreaseBars() {
+        if (barsCount > 1) {
+            barsCount--;
+            drawDemo();
+        }
+    }
+
+    function increaseCategories() {
+        if (itemsCount < 10) {
+            itemsCount++;
+            drawDemo();
+        }
+    }
+
+    function decreaseCategories() {
+        if (itemsCount > 1) {
+            itemsCount--;
+            drawDemo();
+        }
+    }
 </script>
 </body>
 </html>
