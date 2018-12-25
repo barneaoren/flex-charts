@@ -25,34 +25,26 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 		chart.style.width = '100%';
 		chart.style.height = this.labels ? "calc(100% - 20px)" : '100%';
 		chart.classList.add('flex-charts-bar-horizontal-container');
-		var maxStackHeight = 0;
 		var categoriesRelativeHeight = [];
-		var stacksAbsoluteHeight = this.data.map(function(stackData) {
+		this.data.map(function(stackData) {
 			var currStackHeight = 0;
 			stackData.map(function(barData) {
 				currStackHeight += barData;
 			});
-			
-			
 			categoriesRelativeHeight.push(stackData.map(function(categoryData) {
 				return Math.ceil(100 * categoryData / currStackHeight);
 			}));
-			maxStackHeight = Math.max(maxStackHeight, currStackHeight);
-			return currStackHeight;
 		});
-		var stacksRelativeHeight = stacksAbsoluteHeight.map(function (stackAbsoluteHeight) {
-			return Math.floor(100 * stackAbsoluteHeight / maxStackHeight);
-		});
-		
+
 		this.stacks = [];
 		for (var stackIndex = 0; stackIndex < this.data.length; stackIndex++) {
-			var currentStackPointers = {}
+			var currentStackPointers = {};
 			this.stacks.push(currentStackPointers);
 			var stack = document.createElement("div");
 			currentStackPointers.stack = stack;
 			currentStackPointers.categories = [];
 			stack.classList.add('flex-charts-bar-horizontal-stack');
-			stack.style.height = stacksRelativeHeight[stackIndex] + "%";
+			stack.style.height = "0%";
 			var tooltip = document.createElement("div");
 			tooltip.classList.add("flex-charts-tooltip");
 			for (var categoryIndex = 0; categoryIndex < this.data[stackIndex].length; categoryIndex++) {
@@ -105,6 +97,11 @@ flexCharts.prototype.barChartHorizontal = function(options) {
 			}
 			this.target.appendChild(labels);
 		}
+
+		setTimeout(function(chart) {
+            chart.update(chart.data);
+		}, 100, this)
+
 	};
 	
 	this.update = function(data) {

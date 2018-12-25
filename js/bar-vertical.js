@@ -26,23 +26,15 @@ flexCharts.prototype.barChartVertical = function(options) {
         chart.style.width = this.labels ? "calc(100% - 20px)" : '100%';
         chart.style.height = '100%';
         chart.classList.add('flex-charts-bar-vertical-container');
-        var maxStackWidth = 0;
         var categoriesRelativeWidth = [];
         var stacksAbsoluteWidth = this.data.map(function(stackData) {
             var currStackWidth = 0;
             stackData.map(function(barData) {
                 currStackWidth += barData;
             });
-
-
             categoriesRelativeWidth.push(stackData.map(function(categoryData) {
                 return Math.ceil(100 * categoryData / currStackWidth);
             }));
-            maxStackWidth = Math.max(maxStackWidth, currStackWidth);
-            return currStackWidth;
-        });
-        var stacksRelativeWidth = stacksAbsoluteWidth.map(function (stackAbsoluteWidth) {
-            return Math.floor(100 * stackAbsoluteWidth / maxStackWidth);
         });
 
         this.stacks = [];
@@ -53,7 +45,7 @@ flexCharts.prototype.barChartVertical = function(options) {
             currentStackPointers.stack = stack;
             currentStackPointers.categories = [];
             stack.classList.add('flex-charts-bar-vertical-stack');
-            stack.style.width = stacksRelativeWidth[stackIndex] + "%";
+            stack.style.width = "0%";
             var tooltip = document.createElement("div");
             tooltip.classList.add("flex-charts-tooltip");
             for (var categoryIndex = 0; categoryIndex < this.data[stackIndex].length; categoryIndex++) {
@@ -106,6 +98,10 @@ flexCharts.prototype.barChartVertical = function(options) {
             }
             this.target.appendChild(labels);
         }
+
+        setTimeout(function(chart) {
+            chart.update(chart.data);
+        }, 100, this)
     };
 
     this.update = function(data) {
